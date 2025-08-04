@@ -33,6 +33,7 @@ def has_substructure(mol, smarts):
     return mol.HasSubstructMatch(substructure)
 
 def draw_molecules(mols):
+    """Creates a png with the drawn molecules."""
     img = Draw.MolsToGridImage(mols,
                                molsPerRow=1,
                                subImgSize=(250, 250),
