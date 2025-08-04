@@ -37,7 +37,7 @@ def passes_lipinski(mol):
         mw <= 500 and
         logp <= 5 and
         hbd <= 5 and
-        hba <= 10
+        hba <= 0
     )
 
 def has_substructure(mol, smarts):
