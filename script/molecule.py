@@ -34,8 +34,8 @@ def has_substructure(mol, smarts):
 
 def draw_molecules(mols):
     img = Draw.MolsToGridImage(mols,
-                               molsPerRow=2,
-                               subImgSize=(200, 200),
+                               molsPerRow=1,
+                               subImgSize=(250, 250),
                                legends=[f"Mol {i+1}" for i in range(len(mols))]
                             )
     img.save("molecule_grid.png")
