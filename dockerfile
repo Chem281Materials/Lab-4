@@ -9,7 +9,8 @@ RUN apt-get clean && \
                        python3 \
                        python3-pip \
                        python3-dev \
-                       build-essential
+                       build-essential \
+                       libxrender1
 
 # Install Python packages
 RUN pip3 install --no-cache-dir rdkit pytest

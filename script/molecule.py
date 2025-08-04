@@ -1,6 +1,7 @@
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.Chem import Lipinski
+from rdkit.Chem import Draw
 
 # Sample list of SMILES strings
 SMILES_LIST = [
@@ -31,6 +32,14 @@ def has_substructure(mol, smarts):
     substructure = Chem.MolFromSmarts(smarts)
     return mol.HasSubstructMatch(substructure)
 
+def draw_molecules(mols):
+    img = Draw.MolsToGridImage(mols,
+                               molsPerRow=2,
+                               subImgSize=(200, 200),
+                               legends=[f"Mol {i+1}" for i in range(len(mols))]
+                            )
+    img.save("molecule_grid.png")
+
 def main():
     molecules = [Chem.MolFromSmiles(smiles) for smiles in SMILES_LIST]
     print(f"Total molecules: {len(molecules)}")
@@ -43,6 +52,7 @@ def main():
         if has_substructure(mol, AROMATIC_RING_SMARTS)
     ]
     print(f"Molecules with aromatic ring: {len(final_selection)}")
+    draw_molecules(final_selection)
 
 if __name__ == "__main__":
     main()
