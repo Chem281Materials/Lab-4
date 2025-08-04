@@ -32,14 +32,14 @@ def has_substructure(mol, smarts):
     substructure = Chem.MolFromSmarts(smarts)
     return mol.HasSubstructMatch(substructure)
 
-def draw_molecules(mols):
+def draw_molecules(mols, file_name):
     """Creates a png with the drawn molecules."""
     img = Draw.MolsToGridImage(mols,
                                molsPerRow=1,
                                subImgSize=(250, 250),
                                legends=[f"Mol {i+1}" for i in range(len(mols))]
                             )
-    img.save("molecule_grid.png")
+    img.save(file_name)
 
 def main():
     molecules = [Chem.MolFromSmiles(smiles) for smiles in SMILES_LIST]
@@ -53,7 +53,7 @@ def main():
         if has_substructure(mol, AROMATIC_RING_SMARTS)
     ]
     print(f"Molecules with aromatic ring: {len(final_selection)}")
-    draw_molecules(final_selection)
+    draw_molecules(final_selection, "molecule_grid.png")
 
 if __name__ == "__main__":
     main()
