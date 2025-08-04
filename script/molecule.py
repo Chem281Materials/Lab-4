@@ -9,15 +9,6 @@ from scipy.spatial.distance import squareform
 import pandas as pd
 import numpy as np
 
-
-# Sample list of SMILES strings
-SMILES_LIST = [
-    "CC(=O)OC1=CC=CC=C1C(=O)O",      # Aspirin
-    "CC1=CC(=O)NC(C)=C1",            # Paracetamol
-    "CCN(CC)CCCC(C)NC1=NC=NC2=C1C=CN2",  # Caffeine
-    "CN1C=NC2=C1C(=O)N(C(=O)N2C)C"   # Theobromine
-]
-
 # Substructure SMARTS for aromatic ring
 AROMATIC_RING_SMARTS = "c1ccccc1"
 
@@ -87,7 +78,7 @@ def cluster_fingerprints(fps, labels):
     dendrogram(linkage_matrix, labels=labels, leaf_rotation=90)
     plt.title("Hierarchical Clustering of Molecules")
     plt.tight_layout()
-    plt.savefig("dendrogram.png")
+    plt.savefig("molecular_dendrogram.png")
     plt.close()
 
     # Assign clusters (arbitrary threshold)
