@@ -87,12 +87,15 @@ def cluster_fingerprints(fps, labels):
 
 
 def main():
+    # Read in molecules
     molecules = read_molecules_from_smi("files/mols.smi")
     print(f"Total molecules: {len(molecules)}")
 
+    # Lipinski check
     lipinski_passed = [mol for mol in molecules if mol and passes_lipinski(mol)]
     print(f"Molecules passing Lipinski: {len(lipinski_passed)}")
 
+    # Aromatic check
     final_selection = [
         mol for mol in lipinski_passed
         if has_substructure(mol, AROMATIC_RING_SMARTS)
@@ -103,6 +106,7 @@ def main():
         print("No molecules passed the filters.")
         return
 
+    # Get molecular fingerprints and cluster the molecules
     fingerprints = [get_fingerprint(mol) for mol in final_selection]
     smiles = [Chem.MolToSmiles(mol) for mol in final_selection]
     names = [mol.GetProp("id") for mol in final_selection]
