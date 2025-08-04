@@ -12,7 +12,7 @@ RUN apt-get clean && \
                        build-essential
 
 # Install Python packages
-RUN pip3 install --no-cache-dir rdkit
+RUN pip3 install --no-cache-dir rdkit pytest
 
 # Copy the entrypoint file into the Docker image
 COPY entrypoint.sh /entrypoint.sh
