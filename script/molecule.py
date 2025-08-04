@@ -1,6 +1,8 @@
 from rdkit import Chem
 from rdkit.Chem import Descriptors, Lipinski
 from rdkit.Chem import rdFingerprintGenerator
+from rdkit.DataStructs import TanimotoSimilarity
+
 
 # Sample list of SMILES strings
 SMILES_LIST = [
@@ -52,6 +54,22 @@ def has_substructure(mol, smarts):
     return mol.HasSubstructMatch(substructure)
 
 
+def get_fingerprint(mol):
+    return GENERATOR.GetFingerprint(mol)
+
+
+def compute_similarity_matrix(fps):
+    size = len(fps)
+    matrix = np.zeros((size, size))
+    for i in range(size):
+        matrix[i, i] = 1.0
+        for j in range(i + 1, size):
+            sim = TanimotoSimilarity(fps[i], fps[j])
+            matrix[i, j] = sim
+            matrix[j, i] = sim
+    return matrix
+
+
 def main():
     molecules = read_molecules_from_smi("files/mols.smi")
     print(f"Total molecules: {len(molecules)}")
@@ -69,6 +87,9 @@ def main():
         print("No molecules passed the filters.")
         return
 
+    fingerprints = [get_fingerprint(mol) for mol in final_selection]
+    smiles = [Chem.MolToSmiles(mol) for mol in final_selection]
+    names = [mol.GetProp("name") for mol in final_selection]
 
 if __name__ == "__main__":
     main()
