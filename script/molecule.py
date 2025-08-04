@@ -3,6 +3,12 @@ from rdkit.Chem import Descriptors, Lipinski
 from rdkit.Chem import rdFingerprintGenerator
 from rdkit.DataStructs import TanimotoSimilarity
 
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, dendrogram, fcluster
+from scipy.spatial.distance import squareform
+import pandas as pd
+import numpy as np
+
 
 # Sample list of SMILES strings
 SMILES_LIST = [
@@ -61,13 +67,32 @@ def get_fingerprint(mol):
 def compute_similarity_matrix(fps):
     size = len(fps)
     matrix = np.zeros((size, size))
-    for i in range(size):
+    for i in range(size + 1):
         matrix[i, i] = 1.0
-        for j in range(i + 1, size):
+        for j in range(i + 1, size + 1):
             sim = TanimotoSimilarity(fps[i], fps[j])
             matrix[i, j] = sim
             matrix[j, i] = sim
     return matrix
+
+
+def cluster_fingerprints(fps, labels):
+    sim_matrix = compute_similarity_matrix(fps)
+    distance_matrix = 1 - sim_matrix
+    condensed = squareform(distance_matrix)
+    linkage_matrix = linkage(condensed, method='average')
+    
+    # Plot dendrogram
+    plt.figure(figsize=(8, 5))
+    dendrogram(linkage_matrix, labels=labels, leaf_rotation=90)
+    plt.title("Hierarchical Clustering of Molecules")
+    plt.tight_layout()
+    plt.savefig("dendrogram.png")
+    plt.close()
+
+    # Assign clusters (arbitrary threshold)
+    clusters = fcluster(linkage_matrix, t=0.4, criterion='distance')
+    return clusters
 
 
 def main():
@@ -89,7 +114,18 @@ def main():
 
     fingerprints = [get_fingerprint(mol) for mol in final_selection]
     smiles = [Chem.MolToSmiles(mol) for mol in final_selection]
-    names = [mol.GetProp("name") for mol in final_selection]
+    names = [mol.GetProp("id") for mol in final_selection]
+    clusters = cluster_fingerprints(fingerprints, labels=names)
+
+    # Save results
+    df = pd.DataFrame({
+        "SMILES": smiles,
+        "Name": names,
+        "Cluster": clusters
+    })
+    df.to_csv("clustered_molecules.csv", index=False)
+    print("Clustering complete. Results saved to 'clustered_molecules.csv' and 'dendrogram.png'.")
+
 
 if __name__ == "__main__":
     main()
