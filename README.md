@@ -29,6 +29,8 @@ python3 script/molecule.py
 Total molecules: 17
 Molecules passing Lipinski: 0
 Molecules with aromatic ring: 0
+
+pytest test/
 ```
 
 ## ✅ Tasks
