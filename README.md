@@ -1,4 +1,4 @@
-# 💻 Chem 281 Lab: Version control and GIT
+# 💻 CHEM 281 Lab: Version control and GIT
 
 ## 🧪 Goal
 
