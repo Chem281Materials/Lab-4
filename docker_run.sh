@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker run --rm -it -v $(pwd):/repo chem281/lab3
+docker run --rm -it -v $(pwd):/repo chem281/lab4
