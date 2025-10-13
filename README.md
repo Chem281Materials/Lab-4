@@ -59,9 +59,17 @@ Background about this branch:
 It was created to help visualize the molecules after they have been filtered.
 
 ### master
-You may have noticed that the tests on master are actually failing, and once again a bad commit is the culprit! Find which commit introduced the failures by using `git bisect` but this this once you have found it, revert the commit using `git revert`.
+You may have noticed that the tests on master are actually failing, and once again a bad commit is the culprit! Find which commit introduced the failures by using `git bisect` but this time once you have found it, revert the commit using `git revert`.
 
-#### If you have done everything correctly, you should have 3 new commits, 1 for fixing and merging `bug-fix-1` onto master, 1 for cherry-picking the drawing functionality from `draw-mols` and 1 commit for reverting the change that broke the tests.
+#### If you have done everything correctly, you should have 3 new commits, 1 for fixing and merging `bug-fix-1` onto master, 1 for cherry-picking the drawing functionality from `draw-mols` and 1 commit for reverting the change that broke the tests. Your new output should contain a clusted_molcules.csv as well as the dendogram.png and the molecule images.
+
+```python
+root@ed1a22745f7a:/repo# python3 script/molecule.py
+Total molecules: 80
+Molecules passing Lipinski: 80
+Molecules with aromatic ring: 48
+Clustering complete. Results saved to 'clustered_molecules.csv' and 'dendrogram.png'.
+```
 
 ### Extra time
 Now that the molecule drawing code and clustering code is all available on the master branch, can you update the code so that molecules in the same cluster are exported as separate images? This way we can quickly visualize which molecules are in which cluster.
