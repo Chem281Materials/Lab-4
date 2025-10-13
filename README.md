@@ -33,6 +33,8 @@ Molecules with aromatic ring: 0
 pytest test/
 ```
 
+Note: When switching branches outside the docker container you may need to re-build and re-enter, especially on `bug-fix-1` since the dockerfile has changes like adding libraries.
+
 ## ✅ Tasks
 In the repo you should see there are 3 branches:
 ```
