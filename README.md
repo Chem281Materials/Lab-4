@@ -63,7 +63,7 @@ You may have noticed that the tests on master are actually failing, and once aga
 
 #### If you have done everything correctly, you should have 3 new commits, 1 for fixing and merging `bug-fix-1` onto master, 1 for cherry-picking the drawing functionality from `draw-mols` and 1 commit for reverting the change that broke the tests. Your new output should contain a clusted_molcules.csv as well as the dendogram.png and the molecule images.
 
-```python
+```
 root@ed1a22745f7a:/repo# python3 script/molecule.py
 Total molecules: 80
 Molecules passing Lipinski: 80
