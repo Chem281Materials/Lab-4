@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t chem281/lab3 .
+docker build -t chem281/lab4 .
