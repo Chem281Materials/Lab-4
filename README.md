@@ -47,13 +47,13 @@ master
 master is the branch where we would like all of our changes to be incorporated from the other feature branches. Bug-fix-1 and draw-mols are the feature branches.
 
 ### bug-fix-1
-Change onto this branch using `git switch bug-fix-1` and try to run `python3 script/molecule.py` and you should see that there are bugs! Use `git bisect` to narrow down which commit introduced the bug and record the commit. Then fix the bug by creating a new commit. To wrap up, merge the branch back into master as 1 commit (there are 5+ commits that were added, but we only want 1 to be shown on the master log).
+Change onto this branch using `git switch bug-fix-1` and try to run `python3 script/molecule.py` and you should see that there are bugs! Use `git bisect` to narrow down which commit introduced the bug and record the commit. Then fix the bug by creating a new commit. To wrap up, merge the branch back into master as 1 commit (there are 5+ commits that were added, but we only want 1 to be shown on the master log). For any conflicts that arise keep both branches functionality intact. If you have removed too much and now things don't work anymore, you can use `git reset --hard COMMIT_HASH` to reset the commit to the previous one before your changes and then retry.
 
 Background about this branch:
 It was created to add clustering to the filtered molecules, so we could see which molecules are similar to each other.
 
 ### draw-mols
-Change onto this branch using `git switch draw-mols` and you should see a bunch of commits. However, we only really care about the first commit that added the molecule drawning functionality. You should use `git cherry-pick` to select this commit and move it onto the master branch.
+Change onto this branch using `git switch draw-mols` and you should see a bunch of commits. However, we only really care about the first commit that added the molecule drawning functionality. You should use `git cherry-pick` to select this commit and move it onto the master branch. For any conflicts that arise keep both branches functionality intact. If you have removed too much and now things don't work anymore, you can use `git reset --hard COMMIT_HASH` to reset the commit to the previous one before your changes and then retry.
 
 Background about this branch:
 It was created to help visualize the molecules after they have been filtered.
