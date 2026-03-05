@@ -34,6 +34,7 @@ pytest test/
 ```
 
 *Note 1: When switching branches outside the docker container you may need to re-build the image and re-enter, on the feature branches `bug-fix-1` and `draw-mols` since the dockerfile has changes like adding libraries.*
+
 *Note 2: You can use the following command inside the docker container to use git within it `git config --global --add safe.directory /repo` you will still need to exit and re-build the image on dockerfile changes.*
 
 ## ✅ Tasks
