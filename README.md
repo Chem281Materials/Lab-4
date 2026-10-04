@@ -13,16 +13,16 @@ The goal of this lab is to:
 
 ## 🗂️ Provided
 
-- A `docker` file to set up the dev environment.
+- A `containerfile` to set up the dev environment.
 - Cheminformatics code in `scripts/app.py` and associated tests `test/`.
 
 ---
 
 ## 💻 Setup
 ```bash
-./docker_build.sh # You may need to chmod +x
+./build.sh # You may need to chmod +x
 
-./docker_run.sh # You may need to chmod +x
+./run.sh # You may need to chmod +x
 
 python3 script/molecule.py
 
